@@ -9,3 +9,4 @@ Route::get('/', function () {
 
 Route::post('/get-image-status', [OpenAIController::class, 'checkIfImageHasCoffeeCup']);
 Route::post('/get-ai-response', [OpenAIController::class, 'getChatGPTResponse']);
+Route::post('/ba/get-ai-response', [OpenAIController::class, 'getChatGPTResponseBa']);
