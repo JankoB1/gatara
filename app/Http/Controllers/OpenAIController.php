@@ -20,21 +20,21 @@ class OpenAIController extends Controller
             $data = [
                 'model' => 'gpt-4o',
                 'messages' => [
-                  [
-                      "role" => "user",
-                    "content" => [
-                      [
-                        "type" => "text",
-                        "text" => "Is the coffee cup on this image? Answer only with \"yes\" or \"no\"."
-                      ],
-                      [
-                        "type" => "image_url",
-                            "image_url" => [
-                              "url" => $imageUrl
+                    [
+                        "role" => "user",
+                        "content" => [
+                            [
+                                "type" => "text",
+                                "text" => "Is there a coffee cup in this image that contains coffee grounds, is clearly in focus, and does not contain any other beverage or is empty? Answer only with \"yes\" or \"no\"."
+                            ],
+                            [
+                                "type" => "image_url",
+                                "image_url" => [
+                                    "url" => $imageUrl
+                                ]
                             ]
-                      ]
+                        ]
                     ]
-                  ]
                 ],
                 "max_tokens" => 1,
                 "temperature" => 0.02
@@ -150,15 +150,15 @@ class OpenAIController extends Controller
             $age = $dobDate->diff($currentDate)->y;
 
             $url = 'https://api.openai.com/v1/chat/completions';
-            $content = 'Napiši izmišljeno proricanje sudbine na srpskom jeziku u prvom ženskom licu iz oblasti ' . $theme . '. Osoba kojoj pišeš sudbinu ima sledece informacije: ' . $age . ' godina, ' . $gender . ', ' . $relationship . ', ' . $jobStatus . '. Potrebno je da prva rečenica počinje sa "Dragi ' . $name . ' ,\n". Obavezno je da postoje tačno 3 pasusa i da svaki pasus ima po 2-3 kraće rečenice. U svakom pasusu treba da \'vidis u šolji\' po jedan od simbola: ' . $symbols[0]->name . ', ' . $symbols[1]->name . ', ' . $symbols[2]->name . '. Tekst treba da se završava sa rečenicom "Hajde da imamo vremena za " pa reč-2 iz konteksta prethodno generisanog teksta pa "!".';
+            $content = 'Napiši izmišljeno proricanje sudbine na srpskom jeziku u prvom ženskom licu iz oblasti ' . $theme . '. Osoba kojoj pišeš sudbinu ima sledece informacije: ' . $age . ' godina, ' . $gender . ', ' . $relationship . ', ' . $jobStatus . '. Potrebno je da prva rečenica počinje sa "Dragi ' . $name . ' ,\n" ili "Draga ' . $name . ' ,\n" u zavisnosti od toga da li je osoba muško ili žensko. Obavezno je da postoje tačno 3 pasusa i da svaki pasus ima po 2-3 kraće rečenice. U svakom pasusu treba da \'vidis u šolji\' po jedan od simbola: ' . $symbols[0]->name . ', ' . $symbols[1]->name . ', ' . $symbols[2]->name . '. Obraćanje treba da bude u 2. licu jednine i da se izbegne veliki broj infinitiva kako bi obraćanje bilo što ličnije.';
 
             $data = [
                 'model' => 'chatgpt-4o-latest',
                 'messages' => [
-                  [
-                    "role" => "user",
-                      "content" => $content
-                  ]
+                    [
+                        "role" => "user",
+                        "content" => $content
+                    ]
                 ],
 //                "max_tokens" => 250,
             ];
